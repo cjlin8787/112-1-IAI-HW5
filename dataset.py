@@ -32,7 +32,9 @@ class HW5Dataset(Dataset):
             y=wav, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=8,
             fmin=125, fmax=7600).T
 
-        return wav, mel_spectrogram, self.labels[idx]
+        mel_spectrogram = torch.tensor(mel_spectrogram)
+        label = torch.FloatTensor([self.labels[idx]]).long()
+        return mel_spectrogram, label
 
     def collect_files(self):
         paths = []

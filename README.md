@@ -28,7 +28,7 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c cond
 
 ## Todo
 * Design the prediction model to distinguish if the provided recoding is real recording or is generated from AI.
-* You will have to finish the following or the corresponding TODO block in [colab](https://colab.research.google.com/drive/1DS4ok8ux0TUex9yjh2hEmP149SJdUBIv?usp=sharing):
+* You will have to finish the following or the corresponding TODO block in [colab](https://colab.research.google.com/drive/1RgNJxyG_9LoePk95NdBzU9oi-ChUyi-M?usp=sharing):
     * `main.py`:
         * [5 Points] create `train_dataset, val_dataset`
         * [5 Points] create `train_loader, val_loader`
