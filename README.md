@@ -23,12 +23,12 @@ Please check the [Pytorch](https://pytorch.org/) website if CUDA version needs t
 ```
 conda create -n fastspeech python=3.8.2
 conda activate fastspeech
-conda install --file requirements.txt -c pytorch -c defaults -c anaconda
+conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c conda-forge
 ```
 
 ## Todo
 * Design the prediction model to distinguish if the provided recoding is real recording or is generated from AI.
-* You will have to finish the following:
+* You will have to finish the following or the corresponding TODO block in [colab](https://colab.research.google.com/drive/1DS4ok8ux0TUex9yjh2hEmP149SJdUBIv?usp=sharing):
     * `main.py`:
         * [5 Points] create `train_dataset, val_dataset`
         * [5 Points] create `train_loader, val_loader`
@@ -37,8 +37,8 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda
         * [10 Points] finish `def predict_prob(dataloader)`.
         * [10 Points] finish `def predict(dataloader)`.
         * [10 Points] finish `def evalution(y_true, y_pred)`.
-    * Note that the provided sample data is very imbalance, please check [FastSpeech-FloWaveNet](https://github.com/dn070017/FastSpeech-FloWaveNet) for data generation.
-        * [10 Points] setup environment and generate 5 audio (2 points for each file) based on your custom text prompt.
+    * Note that the provided sample data is very imbalance, please check [FastSpeech-FloWaveNet](https://github.com/cjlin8787/FastSpeech-FloWaveNet) for data generation.
+        * [10 Points] setup environment and generate at least 5 audio (2 points for each file) based on your custom text prompt.
     * Model evaluation on held-out test set.
         * 30 × (Accuracy - 0.5).
 * Please check `dataset.py` for the definition of `Dataset`. `main.py` for the main training and prediction workflow.
@@ -49,10 +49,9 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda
 test_dataset = HW5Dataset('test_dataset/meta.csv')
 test_loader = # Create from test_dataset
 
-model = HW5Model()
-model.setup_model()
-model.load_state(f'{id}.pt')
+model = HW5Model(hidden_size=hidden_size, num_layers=num_layers)
+model.load_state('best_model.ckpt')
 y_pred = model.predict(test_loader)
-y_true = torch.concat([batch[2] for batch in val_loader]).numpy()
+y_true = torch.concat([batch[1] for batch in val_loader]).numpy()
 accuracy = (y_pred_np == y_true).sum() / len(y_true)
 ```
