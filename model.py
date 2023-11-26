@@ -6,9 +6,9 @@ from torch.utils.data import DataLoader
 
 
 class HW5Model(nn.Module):
-    def __init__(self):
+    def __init__(self, **kwags):
         super().__init__()
-        self.setup_model() 
+        self.setup_model(**kwags) 
 
     def setup_model(
             self,
