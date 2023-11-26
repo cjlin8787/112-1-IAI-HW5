@@ -36,22 +36,29 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c cond
         * [35 Points] finish `def train_epochs(dataloader)`.
         * [10 Points] finish `def predict_prob(dataloader)`.
         * [10 Points] finish `def predict(dataloader)`.
-        * [10 Points] finish `def evalution(y_true, y_pred)`.
+        * [10 Points] finish `def evaluate(y_true, y_pred)`.
     * Note that the provided sample data is very imbalance, please check [FastSpeech-FloWaveNet](https://github.com/cjlin8787/FastSpeech-FloWaveNet) for data generation.
         * [10 Points] setup environment and generate at least 5 audio (2 points for each file) based on your custom text prompt.
     * Model evaluation on held-out test set.
         * 30 × (Accuracy - 0.5).
 * Please check `dataset.py` for the definition of `Dataset`. `main.py` for the main training and prediction workflow.
 * Please do not change anything except `def setup_model()`, `def train_epochs()`, `def pred_prob()`,
- `def predict()`, and `def evaluation()`. Please do not change the API (parameters and return values) of these function.
+ `def predict()`, and `def evaluate()`. Please do not change the API (parameters and return values) of these function.
 * When evaluating the homework, only the following instructions will be used:
 ```
 test_dataset = HW5Dataset('test_dataset/meta.csv')
 test_loader = # Create from test_dataset
 
 model = HW5Model(hidden_size=hidden_size, num_layers=num_layers)
-model.load_state('best_model.ckpt')
+
+# If you directly clone this github repo
+model.load_state_dict(torch.load("best_model.ckpt"))
+# If you use colab and submit the .ipynb
+model.load_state_dict(torch.load("/content/best_model.ckpt"))
+
+y_pred_prob = model.predict_prob(test_loader)
 y_pred = model.predict(test_loader)
-y_true = torch.concat([batch[1] for batch in val_loader]).numpy()
-accuracy = (y_pred_np == y_true).sum() / len(y_true)
+y_true = torch.concat([labels for mel, labels in val_loader]).numpy().astype('float32')
+print(f'Accuracy on test set: {(y_pred == y_true).sum() / len(y_true):.2f}')
+print(f'Area under precision recall curve on test set: {model.evaluate(y_true, y_pred_prob):.2f}')
 ```
