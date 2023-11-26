@@ -8,6 +8,7 @@ from torch.nn.utils.rnn import pad_sequence
 import subprocess
 
 # Update the meta.csv if you generated some audio
+# All the generated data should be label as 1 (generated from AI)
 command = 'find train_dataset -name "*flowavenet*wav" -exec echo "{}",1 >> train_dataset/meta.csv \\;'
 subprocess.run(command, shell=True)
 
@@ -17,11 +18,6 @@ def collate_batch(batch):
    mels = pad_sequence(mels, batch_first=True)
    return mels, torch.FloatTensor(labels)
 
-
-
-# Add the audio you generated to the training data. 
-# Remember to modify the meta.csv
-# All the generated data should be label as 1 (generated from AI)
 RANDOM_STATE = 2023
 dataset = HW5Dataset('train_dataset/meta.csv')
 random_seed_generator = torch.Generator().manual_seed(RANDOM_STATE)
