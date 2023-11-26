@@ -5,12 +5,19 @@ from dataset import HW5Dataset
 from model import HW5Model
 
 from torch.nn.utils.rnn import pad_sequence
+import subprocess
+
+# Update the meta.csv if you generated some audio
+command = 'find train_dataset -name "*flowavenet*wav" -exec echo "{}",1 >> train_dataset/meta.csv \\;'
+subprocess.run(command, shell=True)
 
 def collate_batch(batch):
    mels, labels = zip(*batch)
    # Pad the mel pectrogram to make them have the same length
    mels = pad_sequence(mels, batch_first=True)
    return mels, torch.FloatTensor(labels)
+
+
 
 # Add the audio you generated to the training data. 
 # Remember to modify the meta.csv

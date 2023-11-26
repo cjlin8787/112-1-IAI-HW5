@@ -15,6 +15,11 @@ train_dataset
     ├── 1.wav
     ...
     └── 500.wav
+dataset.py
+main.py
+model.py
+README.md
+requirements.txt
 ```
 3. The `meta` contains the path to each `wav` file (column 1), and the corresponding label (column 2). If the audio is a real recording, the label will be `0`. If the audio is generated from AI, the label will be `1`.
 
@@ -39,6 +44,20 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c cond
         * [10 Points] finish `def evaluate(y_true, y_pred)`.
     * Note that the provided sample data is very imbalance, please check [FastSpeech-FloWaveNet](https://github.com/cjlin8787/FastSpeech-FloWaveNet) for data generation.
         * [10 Points] setup environment and generate at least 5 audio (2 points for each file) based on your custom text prompt.
+        * Please put the audio you generated under `train_dataset/wavs/`. The directory should look like the following
+ ```
+train_dataset
+├── meta.csv
+└── wavs
+    ├── 0.wav
+    ├── 1.wav
+    ...
+    ├── 500.wav
+    ├── 0_flowavenet_auio.wav
+    ├── 1_flowavenet_auio.wav
+    ├── 2_flowavenet_auio.wav
+    ...
+```
     * Model evaluation on held-out test set.
         * 30 × (Accuracy - 0.5).
 * Please check `dataset.py` for the definition of `Dataset`. `main.py` for the main training and prediction workflow.
