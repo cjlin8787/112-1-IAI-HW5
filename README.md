@@ -26,7 +26,8 @@ requirements.txt
 ## Setup Environment
 Please check the [Pytorch](https://pytorch.org/) website if CUDA version needs to be downloaded.
 ```
-conda create -n fastspeech python=3.8.2
+conda create -n fastspeech python=3.8
+conda config --add channels conda-forge
 conda activate fastspeech
 conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c conda-forge
 ```
@@ -70,11 +71,7 @@ test_dataset = HW5Dataset('test_dataset/meta.csv')
 test_loader = # Create from test_dataset
 
 model = HW5Model(hidden_size=hidden_size, num_layers=num_layers)
-
-# If you directly clone this github repo
-model.load_state_dict(torch.load("best_model.ckpt"))
-# If you use colab and submit the .ipynb
-model.load_state_dict(torch.load("/content/best_model.ckpt"))
+model.load_state_dict(torch.load("./best_model.ckpt"))
 
 y_pred_prob = model.predict_prob(test_loader)
 y_pred = model.predict(test_loader)

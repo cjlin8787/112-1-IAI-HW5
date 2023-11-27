@@ -16,7 +16,9 @@ class HW5Model(nn.Module):
             input_size: int = 8,
             hidden_size: int = 16,
             num_layers: int = 2,
-            lr: float = 1e-3) -> None:
+            lr: float = 1e-3,
+            device: torch.device = torch.device('cpu')
+            ) -> None:
         """Setup model architecture here. To improve the performance of
         the model, You can try different hyperparameters here, or change
         the network architecture. Note that the forward function might
@@ -40,7 +42,8 @@ class HW5Model(nn.Module):
         self.output_layer = nn.Linear(hidden_size, 1)
         self.optimizer = torch.optim.Adam(self.parameters(), lr=lr)
         self.loss = nn.BCEWithLogitsLoss()
-
+        self.device = device
+        self.to(device)
         return
 
     def forward(self, batch: torch.Tensor) -> torch.Tensor:
@@ -93,7 +96,8 @@ class HW5Model(nn.Module):
             self.train()
             train_loss_logs = []
             for mels, labels in tqdm(train_loader):
-                y_true = labels
+                mels = mels.to(self.device)
+                labels = labels.to(self.device)
                 # TODO (5P): change the following, make forward pass, and save the result to y_pred.
                 # CHECK: self.forward
                 # CHECK: https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-optim
@@ -119,7 +123,8 @@ class HW5Model(nn.Module):
             val_loss_logs = []
             with torch.no_grad():
               for mels, labels in tqdm(val_loader):
-                  y_true = labels
+                  mels = mels.to(self.device)
+                  labels = labels.to(self.device)
                   # TODO (5P): change the following, make forward pass, and save the result to y_pred.
                   # CHECK: self.forward
                   # CHECK: https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-optim
@@ -167,7 +172,7 @@ class HW5Model(nn.Module):
         self.eval()
         probs = []
         with torch.no_grad():
-          for batch in dataloader:
+          for mels, labels in dataloader:
               # TODO (10P): change this. The model only predict the
               # logits of the probability of AI generated recording. You
               # need to compute the probability of both real recording and

@@ -51,7 +51,10 @@ lr = 1e-3
 patience = 5
 max_n_epochs = 15
 
-model = HW5Model(hidden_size=hidden_size, num_layers=num_layers, lr=lr)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Device: {device}")
+
+model = HW5Model(hidden_size=hidden_size, num_layers=num_layers, lr=lr, device=device)
 model.train_epochs(train_loader, val_loader, patience=patience, max_n_epochs=max_n_epochs)
 
 # Load your best model and plot the ROC curve of validation data
