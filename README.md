@@ -42,9 +42,11 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c cond
         * [10 Points] finish `def predict_prob(dataloader)`.
         * [10 Points] finish `def predict(dataloader)`.
         * [10 Points] finish `def evaluate(y_true, y_pred)`.
+    * Model evaluation on held-out test set.
+        * [30 × (Accuracy - 0.5) Points]
     * Note that the provided sample data is very imbalance, please check [FastSpeech-FloWaveNet](https://github.com/cjlin8787/FastSpeech-FloWaveNet) for data generation.
         * [10 Points] setup environment and generate at least 5 audio (2 points for each file) based on your custom text prompt.
-        * Please put the audio you generated under `train_dataset/wavs/`. The directory should look like the following
+        * Please put the audio you generated under `train_dataset/wavs/`. The directory should look like the following.
  ```
 train_dataset
 ├── meta.csv
@@ -58,8 +60,7 @@ train_dataset
     ├── 2_flowavenet_auio.wav
     ...
 ```
-    * Model evaluation on held-out test set.
-        * 30 × (Accuracy - 0.5).
+
 * Please check `dataset.py` for the definition of `Dataset`. `main.py` for the main training and prediction workflow.
 * Please do not change anything except `def setup_model()`, `def train_epochs()`, `def pred_prob()`,
  `def predict()`, and `def evaluate()`. Please do not change the API (parameters and return values) of these function.
