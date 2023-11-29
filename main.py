@@ -35,7 +35,7 @@ train_dataset, val_dataset =
 '''
 
 # TODO (5P): Create training and validation data loader based on
-# `train_dataset` and `val_dataset`. Please set `shuffle=False` for the
+# `train_dataset` and `val_dataset`. For val_loader, please set `shuffle=False` for the
 # consistency of the result.
 # CHECK: https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#preparing-your-data-for-training-with-dataloaders
 # e.g. train_loader = DataLoader(..., collate_fn=collate_batch)
