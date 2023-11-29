@@ -37,6 +37,9 @@ class HW5Model(nn.Module):
 
         lr: float
             learning rate of the optimizer.
+        
+        device: torch.device
+            context-manager that changes the selected device.
         """
         self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
         self.output_layer = nn.Linear(hidden_size, 1)

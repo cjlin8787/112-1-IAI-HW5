@@ -35,8 +35,8 @@ train_dataset, val_dataset =
 '''
 
 # TODO (5P): Create training and validation data loader based on
-# `train_dataset` and `val_dataset`. For val_loader, please set `shuffle=False` for the
-# consistency of the result.
+# `train_dataset` and `val_dataset`. For val_loader, please set 
+# `shuffle=False` for the consistency of the result.
 # CHECK: https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#preparing-your-data-for-training-with-dataloaders
 # e.g. train_loader = DataLoader(..., collate_fn=collate_batch)
 '''
@@ -58,7 +58,7 @@ model = HW5Model(hidden_size=hidden_size, num_layers=num_layers, lr=lr, device=d
 model.train_epochs(train_loader, val_loader, patience=patience, max_n_epochs=max_n_epochs)
 
 # Load your best model and plot the ROC curve of validation data
-model.load_state_dict(torch.load("/content/best_model.ckpt"))
+model.load_state_dict(torch.load("best_model.ckpt"))
 y_pred_prob = model.predict_prob(val_loader)
 y_pred = model.predict(val_loader)
 y_true = torch.concat([labels for mel, labels in val_loader]).numpy().astype('float32')
