@@ -11,7 +11,6 @@ Recent advances in generative artificial intelligence (AI) have created many pos
 train_dataset
 ├── meta.csv
 └── wavs
-    ├── 0.wav
     ├── 1.wav
     ...
     └── 500.wav
@@ -44,7 +43,7 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c cond
         * [10 Points] finish `def predict(dataloader)`.
         * [10 Points] finish `def evaluate(y_true, y_pred)`.
     * Model evaluation on held-out test set.
-        * [30 × (Accuracy - 0.5) Points]
+        * [30 × (F1 score - 0.5) Points]
     * Note that the provided sample data is very imbalance, please check [FastSpeech-FloWaveNet](https://github.com/cjlin8787/FastSpeech-FloWaveNet) for data generation.
         * [10 Points] setup environment and generate at least 5 audio (2 points for each file) based on your custom text prompt.
         * Please put the audio you generated under `train_dataset/wavs/`. The directory should look like the following.
@@ -52,7 +51,6 @@ conda install --file requirements.txt -c pytorch -c defaults -c anaconda -c cond
 train_dataset
 ├── meta.csv
 └── wavs
-    ├── 0.wav
     ├── 1.wav
     ...
     ├── 500.wav
